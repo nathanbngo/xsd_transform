@@ -1,6 +1,6 @@
-# XSD → XSLT Transform
+# XML → XSLT Transform
 
-A small web UI to paste or drop an **XSD** (or any XML) and an **XSLT** stylesheet, run the transformation in the browser, and **preview** or **download** the result.
+A small web UI to paste or drop **source XML** and an **XSLT** stylesheet, run the transformation in the browser, and **preview** or **download** the result.
 
 ## How to run
 
@@ -18,7 +18,7 @@ A small web UI to paste or drop an **XSD** (or any XML) and an **XSLT** styleshe
 
 ## Usage
 
-- **Source XML**: paste your XSD (it’s XML) or load it via Browse / drag-and-drop.
+- **Source XML**: paste your instance document or load it via Browse / drag-and-drop (e.g. `BenefitsExtract.xml`).
 - **XSLT**: paste your stylesheet or load it the same way.
 - Click **Run transformation**. Output appears in the panel below.
 - **Copy** or **Download** the result (`.xml`, `.html`, or `.txt` depending on output type).
@@ -26,9 +26,9 @@ A small web UI to paste or drop an **XSD** (or any XML) and an **XSLT** styleshe
 ## Notes
 
 - The app uses the browser’s **XSLT 1.0** engine. XSLT 2.0/3.0 stylesheets need something like **Saxon** on a server.
-- **UTF-8 BOM** is stripped when loading files so XML parsing doesn’t fail on schemas saved from some editors.
+- **UTF-8 BOM** is stripped when loading files so XML parsing doesn’t fail.
 - **Very large output** (>500k chars) is truncated in the preview only; **Download** always contains the full result.
-- If **Run** does nothing or stylesheets “fail silently”, open DevTools: Chromium’s `importStylesheet` can return `false` for invalid/unsupported XSLT—the app now surfaces that as an error.
+- If **Run** does nothing or stylesheets “fail silently”, open DevTools: Chromium’s `importStylesheet` can return `false` for invalid/unsupported XSLT—the app surfaces that as an error.
 
 ## Troubleshooting
 
@@ -38,7 +38,8 @@ A small web UI to paste or drop an **XSD** (or any XML) and an **XSLT** styleshe
 | Stylesheet rejected | Use XSLT 1.0 only; avoid 2.0/3.0 features. |
 | Empty output | XSLT must produce a single root element for `transformToDocument`; text-only output needs a different pipeline (e.g. server Saxon). |
 | Drag highlight flickers | Fixed via drag-depth counting on dropzones. |
-- If the transform outputs HTML (root element `html` in XHTML namespace), the download will use a `.html` extension.
+
+If the transform outputs HTML (root element `html` in XHTML namespace), the download will use a `.html` extension.
 
 ## Files
 

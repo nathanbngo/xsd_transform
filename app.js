@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  const xsdText = document.getElementById("xsd-text");
+  const sourceXmlText = document.getElementById("source-xml-text");
   const xsltText = document.getElementById("xslt-text");
   const btnTransform = document.getElementById("btn-transform");
   const btnClear = document.getElementById("btn-clear");
@@ -13,11 +13,11 @@
   const outputCode = document.getElementById("output-code");
   const outputMeta = document.getElementById("output-meta");
 
-  const xsdFileInput = document.getElementById("xsd-file");
+  const sourceXmlFileInput = document.getElementById("source-xml-file");
   const xsltFileInput = document.getElementById("xslt-file");
-  const loadXsdBtn = document.getElementById("load-xsd-file");
+  const loadSourceXmlBtn = document.getElementById("load-source-xml-file");
   const loadXsltBtn = document.getElementById("load-xslt-file");
-  const dropXsd = document.getElementById("drop-xsd");
+  const dropSourceXml = document.getElementById("drop-source-xml");
   const dropXslt = document.getElementById("drop-xslt");
 
   let lastOutputString = "";
@@ -165,11 +165,11 @@
       return;
     }
 
-    let xsdStr = normalizeInput(xsdText.value);
+    let sourceXmlStr = normalizeInput(sourceXmlText.value);
     let xsltStr = normalizeInput(xsltText.value);
 
-    if (!xsdStr.trim()) {
-      showError("Please provide source XML (your XSD content).");
+    if (!sourceXmlStr.trim()) {
+      showError("Please provide source XML to transform.");
       return;
     }
     if (!xsltStr.trim()) {
@@ -183,21 +183,20 @@
       setTransforming(false);
     }
 
-    // Defer so UI can paint loading state
     setTimeout(function () {
       try {
-        runTransformSync(xsdStr, xsltStr);
+        runTransformSync(sourceXmlStr, xsltStr);
       } finally {
         finish();
       }
     }, 0);
   }
 
-  function runTransformSync(xsdStr, xsltStr) {
+  function runTransformSync(sourceXmlStr, xsltStr) {
     let sourceDoc;
     let xsltDoc;
     try {
-      sourceDoc = parseXml(xsdStr, "Source XML");
+      sourceDoc = parseXml(sourceXmlStr, "Source XML");
       xsltDoc = parseXml(xsltStr, "XSLT");
     } catch (e) {
       showError(e.message);
@@ -212,7 +211,6 @@
       showError("Failed to load stylesheet: " + (e.message || String(e)));
       return;
     }
-    // Chromium returns false on failure instead of throwing
     if (importOk === false) {
       showError(
         "Stylesheet was rejected (invalid XSLT 1.0 or unsupported features). Check console for details. XSLT 2.0/3.0 is not supported in the browser."
@@ -293,25 +291,28 @@
     }, 2500);
   }
 
-  loadXsdBtn.addEventListener("click", function () {
-    xsdFileInput.click();
+  loadSourceXmlBtn.addEventListener("click", function () {
+    sourceXmlFileInput.click();
   });
   loadXsltBtn.addEventListener("click", function () {
     xsltFileInput.click();
   });
 
-  xsdFileInput.addEventListener("change", function () {
-    const f = xsdFileInput.files && xsdFileInput.files[0];
+  sourceXmlFileInput.addEventListener("change", function () {
+    const f = sourceXmlFileInput.files && sourceXmlFileInput.files[0];
     if (!f) return;
     readFileAsText(f)
       .then(function (text) {
-        xsdText.value = text;
+        sourceXmlText.value = text;
         clearError();
       })
       .catch(function (err) {
-        showError("Could not read XSD file: " + (err && err.message ? err.message : "unknown error"));
+        showError(
+          "Could not read XML file: " +
+            (err && err.message ? err.message : "unknown error")
+        );
       });
-    xsdFileInput.value = "";
+    sourceXmlFileInput.value = "";
   });
 
   xsltFileInput.addEventListener("change", function () {
@@ -323,7 +324,10 @@
         clearError();
       })
       .catch(function (err) {
-        showError("Could not read XSLT file: " + (err && err.message ? err.message : "unknown error"));
+        showError(
+          "Could not read XSLT file: " +
+            (err && err.message ? err.message : "unknown error")
+        );
       });
     xsltFileInput.value = "";
   });
@@ -359,25 +363,24 @@
           clearError();
         })
         .catch(function (err) {
-          showError("Could not read dropped file: " + (err && err.message ? err.message : "unknown error"));
+          showError(
+            "Could not read dropped file: " +
+              (err && err.message ? err.message : "unknown error")
+          );
         });
     });
   }
 
-  setupDropzone(dropXsd, xsdText);
+  setupDropzone(dropSourceXml, sourceXmlText);
   setupDropzone(dropXslt, xsltText);
 
-  const SAMPLE_XSD =
+  /** Minimal sample XML document (not a schema) */
+  const SAMPLE_XML =
     '<?xml version="1.0" encoding="UTF-8"?>\n' +
-    '<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://example.com/ns" xmlns:t="http://example.com/ns" elementFormDefault="qualified">\n' +
-    '  <xs:element name="root">\n' +
-    "    <xs:complexType>\n" +
-    "      <xs:sequence>\n" +
-    '        <xs:element name="item" type="xs:string" maxOccurs="unbounded"/>\n' +
-    "      </xs:sequence>\n" +
-    "    </xs:complexType>\n" +
-    "  </xs:element>\n" +
-    "</xs:schema>";
+    "<root>\n" +
+    "  <item id=\"1\">first</item>\n" +
+    "  <item id=\"2\">second</item>\n" +
+    "</root>";
 
   const SAMPLE_XSLT =
     '<?xml version="1.0" encoding="UTF-8"?>\n' +
@@ -392,14 +395,14 @@
 
   document.getElementById("btn-sample").addEventListener("click", function () {
     clearError();
-    xsdText.value = SAMPLE_XSD;
+    sourceXmlText.value = SAMPLE_XML;
     xsltText.value = SAMPLE_XSLT;
   });
 
   btnTransform.addEventListener("click", runTransform);
 
   btnClear.addEventListener("click", function () {
-    xsdText.value = "";
+    sourceXmlText.value = "";
     xsltText.value = "";
     clearError();
     clearOutput();

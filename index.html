@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>XSD → XSLT Transform</title>
+  <title>XML → XSLT Transform</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -15,10 +15,10 @@
     <div class="header-inner">
       <div class="brand">
         <span class="brand-icon">◇</span>
-        <h1>XSD Transform</h1>
+        <h1>XML Transform</h1>
         <span class="brand-tag">XSLT 1.0</span>
       </div>
-      <p class="tagline">Load an XSD (XML) and an XSLT stylesheet—run the transform and preview or download the result.</p>
+      <p class="tagline">Load <strong>source XML</strong> and an <strong>XSLT</strong> stylesheet—run the transform and preview or download the result.</p>
     </div>
   </header>
 
@@ -26,20 +26,20 @@
     <section class="panel panel-inputs">
       <div class="panel-header">
         <h2>Inputs</h2>
-        <span class="hint">XSD files are XML; paste or drop files below</span>
+        <span class="hint">Paste or drop your XML file below</span>
       </div>
 
       <div class="input-grid">
-        <div class="input-block" data-kind="xsd">
+        <div class="input-block" data-kind="xml">
           <div class="input-block-header">
-            <label for="xsd-text">Source XML (XSD)</label>
+            <label for="source-xml-text">Source XML</label>
             <div class="input-actions">
-              <button type="button" class="btn btn-ghost btn-sm" id="load-xsd-file">Browse…</button>
-              <input type="file" id="xsd-file" accept=".xsd,.xml,application/xml,text/xml" hidden />
+              <button type="button" class="btn btn-ghost btn-sm" id="load-source-xml-file">Browse…</button>
+              <input type="file" id="source-xml-file" accept=".xml,application/xml,text/xml" hidden />
             </div>
           </div>
-          <div class="dropzone" id="drop-xsd">
-            <textarea id="xsd-text" spellcheck="false" placeholder="<?xml version=&quot;1.0&quot;?>&#10;<xs:schema xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; …"></textarea>
+          <div class="dropzone" id="drop-source-xml">
+            <textarea id="source-xml-text" spellcheck="false" placeholder="Paste XML here — e.g. your instance document to transform"></textarea>
           </div>
         </div>
 
@@ -58,7 +58,7 @@
       </div>
 
       <div class="toolbar">
-        <button type="button" class="btn btn-ghost btn-sm" id="btn-sample" title="Fill with a minimal XSD and identity XSLT">Load sample</button>
+        <button type="button" class="btn btn-ghost btn-sm" id="btn-sample" title="Fill with minimal sample XML and identity XSLT">Load sample</button>
         <button type="button" class="btn btn-primary" id="btn-transform">
           <span class="btn-icon">⚡</span>
           Run transformation
