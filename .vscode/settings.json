@@ -1,0 +1,21 @@
+{
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "terminal.integrated.profiles.windows": {
+    "Git Bash": {
+      "path": "C:\\Users\\nango\\AppData\\Local\\Programs\\Git\\bin\\bash.exe",
+      "args": ["--login", "-i"]
+    },
+    "PowerShell": {
+      "source": "PowerShell",
+      "args": [
+        "-NoExit",
+        "-Command",
+        "& { $p = 'C:\\Users\\nango\\bin;C:\\Users\\nango\\AppData\\Local\\Programs\\Git\\cmd'; if ($env:Path -notlike '*Git\\cmd*') { $env:Path = $p + ';' + $env:Path } }"
+      ]
+    },
+    "Command Prompt": {
+      "path": "C:\\Windows\\System32\\cmd.exe",
+      "args": ["/k", "set PATH=C:\\Users\\nango\\bin;C:\\Users\\nango\\AppData\\Local\\Programs\\Git\\cmd;%PATH%"]
+    }
+  }
+}
