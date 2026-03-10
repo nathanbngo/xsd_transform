@@ -1,17 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<bc:Benefits_Extract_Employees xmlns:bc="urn:com.workday/bc">
-<bc:Header xmlns:bc="urn:com.workday/bc">
-    <bc:Version>29.0</bc:Version>
-    
-    <bc:Client_Number>C0IYB</bc:Client_Number>
-    <bc:File_Run_Date>2026-03-06</bc:File_Run_Date>
-    <bc:Effective_Date>2026-03-06</bc:Effective_Date>
-    <bc:Last_Update>2026-03-06T13:30:11</bc:Last_Update>
-    <bc:From_Effective_Date>2026-03-06</bc:From_Effective_Date>
-    <bc:From_Last_Update>2026-03-06T13:15:38</bc:From_Last_Update>
-    
-    
-    <bc:Full_Extract>false</bc:Full_Extract>
-    <bc:Document_Retention_Policy/>
-</bc:Header>
-</bc:Benefits_Extract_Employees> 

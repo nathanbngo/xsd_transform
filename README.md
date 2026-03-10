@@ -18,7 +18,7 @@ A small web UI to paste or drop **source XML** and an **XSLT** stylesheet, run t
 
 ## Usage
 
-- **Source XML**: paste your instance document or load it via Browse / drag-and-drop (e.g. `BenefitsExtract.xml`).
+- **Source XML**: paste your instance document or load it via Browse / drag-and-drop (e.g. your instance `.xml`).
 - **XSLT**: paste your stylesheet or load it the same way.
 - Click **Run transformation**. Output appears in the panel below.
 - **Copy** or **Download** the result (`.xml`, `.html`, or `.txt` depending on output type).
