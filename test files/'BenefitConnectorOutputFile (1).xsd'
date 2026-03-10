@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:bc="urn:com.workday/bc"
+            targetNamespace="urn:com.workday/bc"
+            elementFormDefault="qualified"
+            attributeFormDefault="qualified">
+    <xsd:element name="Benefits_Extract_Employees">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Header" type="bc:HeaderType"/>
+                <xsd:element name="Employee"
+                         type="bc:EmployeeType"
+                         minOccurs="0"
+                         maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="HeaderType">
+        <xsd:sequence>
+            <xsd:element name="Version" type="xsd:string"/>
+            <xsd:element name="Client_Name" type="xsd:string"/>
+            <xsd:element name="Client_Number" type="xsd:string"/>
+            <xsd:element name="File_Run_Date" type="xsd:date"/>
+            <xsd:element name="Effective_Date" type="xsd:date"/>
+            <xsd:element name="Last_Update" type="xsd:dateTime"/>
+            <xsd:element name="From_Effective_Date" type="xsd:date"/>
+            <xsd:element name="From_Last_Update" type="xsd:dateTime"/>
+            <xsd:element name="Payroll_Start_Date" type="xsd:date" minOccurs="0"/>
+            <xsd:element name="Payroll_End_Date" type="xsd:date" minOccurs="0"/>
+            <xsd:element name="Full_Extract" type="xsd:boolean"/>
+            <xsd:element name="Document_Retention_Policy" type="xsd:integer"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="EmployeeType">
+      <xsd:sequence>
+         <xsd:element name="Personal"
+                      type="bc:PersonalType"
+                      minOccurs="0"
+                      nillable="true"/>
+         <xsd:element name="Status"
+                      type="bc:StatusType"
+                      minOccurs="0"
+                      nillable="true"/>
+      </xsd:sequence>
+   </xsd:complexType>
+    
+    <xsd:complexType name="PersonalType">
+      <xsd:annotation>
+         <xsd:documentation>This configuration defines the set of fields that will be included in the Personal Data section of the output file. Fields with a tick in the "Include in Output " column will be included in the output file. The “Required Field” and “Maximum Length” columns provide control over the validation rules that are applied to the employee data.</xsd:documentation>
+      </xsd:annotation>
+      <xsd:sequence>
+         <xsd:element name="First_Name"
+                      type="bc:StringType"
+                      minOccurs="0"
+                      nillable="true">
+            <xsd:annotation>
+               <xsd:documentation>First Name</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="Last_Name"
+                      type="bc:StringType"
+                      minOccurs="0"
+                      nillable="true">
+            <xsd:annotation>
+               <xsd:documentation>Last Name</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="Social_Security_Number"
+                      type="bc:StringType"
+                      minOccurs="0"
+                      nillable="true">
+            <xsd:annotation>
+               <xsd:documentation>Social Security Number</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="Gender"
+                      type="bc:StringType"
+                      minOccurs="0"
+                      nillable="true">
+            <xsd:annotation>
+               <xsd:documentation>Gender</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="Birth_Date"
+                      type="bc:StringType"
+                      minOccurs="0"
+                      nillable="true">
+            <xsd:annotation>
+               <xsd:documentation>Birth Date</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="Language"
+                      type="bc:StringType"
+                      minOccurs="0"
+                      nillable="true">
+            <xsd:annotation>
+               <xsd:documentation>Preferred language of employee</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="Home_Municipality"
+                      type="bc:StringType"
+                      minOccurs="0"
+                      nillable="true">
+            <xsd:annotation>
+               <xsd:documentation>Home Municipality</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="Home_Region"
+                      type="bc:StringType"
+                      minOccurs="0"
+                      nillable="true">
+            <xsd:annotation>
+               <xsd:documentation>Home Region</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="Home_Postal_Code"
+                      type="bc:StringType"
+                      minOccurs="0"
+                      nillable="true">
+            <xsd:annotation>
+               <xsd:documentation>Home Postal Code</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="Home_Country"
+                      type="bc:StringType"
+                      minOccurs="0"
+                      nillable="true">
+            <xsd:annotation>
+               <xsd:documentation>Home Country</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="Work_Region"
+                      type="bc:StringType"
+                      minOccurs="0"
+                      nillable="true">
+            <xsd:annotation>
+               <xsd:documentation>Work Region</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="Home_International_Phone_Code"
+                      type="bc:StringType"
+                      minOccurs="0"
+                      nillable="true">
+            <xsd:annotation>
+               <xsd:documentation>Home International Phone Code</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="Home_Phone_Number"
+                      type="bc:StringType"
+                      minOccurs="0"
+                      nillable="true">
+            <xsd:annotation>
+               <xsd:documentation>Home Phone Number</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="Home_Phone_Extension"
+                      type="bc:StringType"
+                      minOccurs="0"
+                      nillable="true">
+            <xsd:annotation>
+               <xsd:documentation>Home Phone Extension</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="Work_International_Phone_Code"
+                      type="bc:StringType"
+                      minOccurs="0"
+                      nillable="true">
+            <xsd:annotation>
+               <xsd:documentation>Work International Phone Code</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="Work_Phone_Number"
+                      type="bc:StringType"
+                      minOccurs="0"
+                      nillable="true">
+            <xsd:annotation>
+               <xsd:documentation>Work Phone Number</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="Work_Phone_Extension"
+                      type="bc:StringType"
+                      minOccurs="0"
+                      nillable="true">
+            <xsd:annotation>
+               <xsd:documentation>Work Phone Extension</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="Home_Email_Address"
+                      type="bc:StringType"
+                      minOccurs="0"
+                      nillable="true">
+            <xsd:annotation>
+               <xsd:documentation>Home Email Address</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="Work_Email_Address"
+                      type="bc:StringType"
+                      minOccurs="0"
+                      nillable="true">
+            <xsd:annotation>
+               <xsd:documentation>Work Email Address</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="StatusType">
+      <xsd:annotation>
+         <xsd:documentation>This configuration defines the set of fields that will be included in the Status Data section of the output file. Fields with a tick in the "Include in Output " column will be included in the output file. The “Required Field” and “Maximum Length” columns provide control over the validation rules that are applied to the employee data.</xsd:documentation>
+      </xsd:annotation>
+      <xsd:sequence>
+         <xsd:element name="Employee_Status"
+                      type="bc:StringType"
+                      minOccurs="0"
+                      nillable="true">
+            <xsd:annotation>
+               <xsd:documentation>Employee status (for example, Active or OnLeaveWithBenefits)</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="Hire_Date"
+                      type="bc:StringType"
+                      minOccurs="0"
+                      nillable="true">
+            <xsd:annotation>
+               <xsd:documentation>Hire Date</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="Additional_InformationType">
+      <xsd:sequence>
+         <xsd:element name="Email_Address_Type"
+                      type="bc:StringType"
+                      minOccurs="0"
+                      nillable="true">
+            <xsd:annotation>
+               <xsd:documentation/>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="Email_Address"
+                      type="bc:StringType"
+                      minOccurs="0"
+                      nillable="true">
+            <xsd:annotation>
+               <xsd:documentation/>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="Phone_Number_Type"
+                      type="bc:StringType"
+                      minOccurs="0"
+                      nillable="true">
+            <xsd:annotation>
+               <xsd:documentation/>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="Phone_Number_International_Country_Code"
+                      type="bc:StringType"
+                      minOccurs="0"
+                      nillable="true">
+            <xsd:annotation>
+               <xsd:documentation/>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="Phone_Number_Area_Code"
+                      type="bc:StringType"
+                      minOccurs="0"
+                      nillable="true">
+            <xsd:annotation>
+               <xsd:documentation/>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="Phone_Number"
+                      type="bc:StringType"
+                      minOccurs="0"
+                      nillable="true">
+            <xsd:annotation>
+               <xsd:documentation/>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="Phone_Number_Extension"
+                      type="bc:StringType"
+                      minOccurs="0"
+                      nillable="true">
+            <xsd:annotation>
+               <xsd:documentation/>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+    
+    <xsd:simpleType name="OperationType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="ADD"/>
+            <xsd:enumeration value="REMOVE"/>
+            <xsd:enumeration value="MODIFY"/>
+            <xsd:enumeration value="NONE"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="Address_LineType">
+        <xsd:simpleContent>
+            <xsd:extension base="bc:StringType">
+                <xsd:attribute name="Label" type="xsd:string"/>
+                <xsd:attribute name="Type" type="xsd:string"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:simpleType name="YearType">
+        <xsd:restriction base="xsd:integer">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="9999"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="StringType">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="PriorValue" type="xsd:string"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="BooleanType">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:boolean">
+                <xsd:attribute name="PriorValue" type="xsd:string"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="DateType">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:date">
+                <xsd:attribute name="PriorValue" type="xsd:string"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:complexType name="DateTimeType">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:dateTime">
+                <xsd:attribute name="PriorValue" type="xsd:string"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+</xsd:schema>
